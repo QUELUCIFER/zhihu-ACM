@@ -89,7 +89,7 @@ def Generate_WordCloud(src_img):
     # 设置词云相关参数
     wc = wordcloud.WordCloud(
      #font_path = 'C:\Windows\Fonts\msyh.ttc', # 设置字体
-     font_path = './msyh.ttc',
+     font_path = 'msyh.ttf',
      background_color='white',                   # 背景颜色
      mask = mask,                                # 文字颜色+形状（有mask参数再设定宽高是无效的）
      max_words = num,                         # 显示词数
