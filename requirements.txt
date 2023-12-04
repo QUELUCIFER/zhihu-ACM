@@ -1,0 +1,12 @@
+streamlit
+matplotlib
+numpy
+jieba
+requests
+wordcloud
+PIL
+snownlp
+pandas
+
+
+
