@@ -13,8 +13,6 @@ import jieba.posseg as seg
 import pandas as pd
 
 
-
-@st.cache_data
 def read_deal_text():
  with open("zhihu_answers.txt", "r", encoding='utf-8') as f:
   txt = f.read()
@@ -29,7 +27,7 @@ def read_deal_text():
  #print("文本处理完成")
 
 
-@st.cache_data
+
 def GetZhihuText(question_id):
 
     headers = {
@@ -58,7 +56,7 @@ def GetZhihuText(question_id):
         with open('zhihu_answers' + '.txt', mode='a', encoding='utf-8') as f:
             f.write(f'{name},{content}\n')
 
-@st.cache_data
+
 def WordSeg():
 
     filename = 'zhihu_answers.txt'
@@ -79,7 +77,6 @@ def WordSeg():
         word, count = lst[i]
         st.write("{0:<10}{1:>5}".format(word, count))
 
-@st.cache_data
 def Generate_WordCloud(src_img):
 
     read_deal_text()
@@ -115,7 +112,6 @@ def Generate_WordCloud(src_img):
         )
 
 
-@st.cache_data
 def SentimentAnalysis():
     with open('zhihu_answers.txt', 'r', encoding='utf-8') as f:
         text = f.read()
