@@ -42,19 +42,20 @@ def GetZhihuText(question_id):
     response = requests.get(url=url, headers=headers)
 
     title = re.findall('<title data-rh="true">(.*?) - 知乎</title>', response.text)[0]
-
+    if str(title) == '你似乎来到了没有知识存在的荒原':
+        return False
     html_data = re.findall('<script id="js-initialData" type="text/json">(.*?)</script>', response.text)[0]
 
     # 下面要把字符串转为字典
-
     json_data = json.loads(html_data)
     json_dict = json_data['initialState']['entities']['answers']
 
     for i in json_dict.keys():
         content = json_dict[i]['excerpt']
         name = json_dict[i]['author']['name']
-        with open('zhihu_answers' + '.txt', mode='a', encoding='utf-8') as f:
+        with open('zhihu_answers.txt', mode='a', encoding='utf-8') as f:
             f.write(f'{name},{content}\n')
+    return True
 
 
 def WordSeg():
@@ -198,11 +199,15 @@ with st.form(key='my_form'):
     question_id = st.text_input(label='输入你想分析的ACM相关编程竞赛对应的知乎问题的id')
     submit_button = st.form_submit_button(label='Submit')
     if len(question_id) != 8 and len(question_id) != 9:
-        st.markdown("输入不合法！请重新输入！")
+        if question_id:
+            st.markdown("输入不合法！请重新输入！")
     else:
         st.write(f'你输入的问题id是{question_id}')
-        GetZhihuText(question_id)
-        success_for_word_segmentation = True
+        if GetZhihuText(question_id):
+            success_for_word_segmentation = True
+        else:
+            st.write("输入的id对应的问题不存在，请重新输入！")
+            success_for_word_segmentation = False
 
 
 if success_for_word_segmentation:
