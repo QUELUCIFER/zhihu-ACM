@@ -95,7 +95,7 @@ def Generate_WordCloud(src_img):
      mask = mask,                                # 文字颜色+形状（有mask参数再设定宽高是无效的）
      max_words = num,                         # 显示词数
      max_font_size = 150 ,                        # 最大字号
-     stopwords={'一个'},  # 设置停用词，不再词云图中表示
+     stopwords={'一个','的','了','是','感觉','也','没','一下','还是','另外','是不是','貌似','只派','什么','可以','E'},  # 设置停用词，不再词云图中表示
     )
     wc.generate(txt)
     wc.recolor(color_func=wordcloud.ImageColorGenerator(mask))
